@@ -1,0 +1,232 @@
+@charset "utf-8";
+body {
+	background-color: #CCC;
+	margin: 0px;
+	padding: 0px;
+}
+.mainbox {
+	padding: 2%;
+	width: 80%;
+	border: 5px solid #FFF;
+	border-radius: 15px;
+	margin-top: 2%;
+	margin-right: 10%;
+	margin-bottom: 2%;
+	margin-left: 10%;
+	position: absolute;
+	height: 80%;
+	background-color: #FFF;
+}
+.logo {
+	background-color: #FFF;
+	padding: 1%;
+	width: 98%;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-size: 2.5em;
+	font-weight: bold;
+	font-style: italic;
+	height: 120px;
+	background-image: url(Mockelngymnasiet-logo-rgb-120.gif);
+	background-repeat: no-repeat;
+	background-position: 20px 0px;
+}
+.addbox {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: xx-large;
+	font-weight: bold;
+	height: auto;
+	width: auto;
+	border: 3px solid #09C;
+	float: right;
+	position: relative;
+	top: 0px;
+	right: 10px;
+	font-style: normal;
+	text-align: center;
+	vertical-align: top;
+	padding: 3px;
+	color: #999;
+	border-radius:8px;
+}
+
+.statbox {
+	padding: 2%;
+	width: 96%;
+	position: relative;
+	height: 85%;
+}
+.content {
+	width: 96%;
+	position: relative;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: xx-large;
+	font-weight: bold;
+	background-color: #EEE;
+	position: relative;
+	left: 0px;
+	top: 0px;
+	float:left;
+}
+.RO3Bar, .RO4Bar {
+	margin: 10px;
+	width: 80%;
+	position: relative;
+	padding-right: 5%;
+	padding-left: 5%;
+	font-size: large;
+	font-weight: normal;
+
+}
+.barimg {
+	border: 2px solid #333;
+	background-color:#FF8040;
+	
+}
+
+.RO3Bar {
+	height: 200px;
+}
+.bar {
+	font-size: x-large;
+	font-style: normal;
+	font-weight: normal;
+	color: #CCC;
+	margin-left: 70px;
+	background-color: #39F;
+	height: 50px;
+	vertical-align: middle;
+}
+.barlabel {
+	font-size: x-large;
+	font-style: normal;
+	font-weight: bold;
+	color: #666;
+	float: left;
+	width: 150px;
+	background-color: #CCC;
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+}
+details {
+	font-size: small;
+	font-style: normal;
+	font-weight: normal;
+	color: #666;
+	font-family: Tahoma, Geneva, sans-serif;
+}
+summary {
+	font-weight: bold;
+}
+
+
+
+
+.RO4Bar {
+	height: 200px;
+}
+.pers {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: large;
+	padding: 3%;
+	position: relative;
+	bottom: 0px;
+	font-weight: normal;
+}
+a.addsteps, a.addsteps:hover {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: x-large;
+	font-style: normal;
+	font-weight: bold;
+	text-decoration: none;
+}
+a {
+	font-family: Tahoma, Geneva, sans-serif;
+	text-decoration: none;
+	color: #09C;
+}
+a:hover {
+	font-family: Tahoma, Geneva, sans-serif;
+	text-decoration: none;
+	color: #FFF;
+	background-color: #09C;
+}
+#name {
+	width: 40%;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: x-large;
+	border: 1px solid #999;
+	border-radius:5px;
+}
+#RO {
+	width: auto;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: x-large;
+	border: 1px solid #999;
+	border-radius:5px;
+}
+#steps {
+	width: 20%;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: x-large;
+	border: 1px solid #999;
+	border-radius:5px;}
+#btn {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: x-large;
+	font-weight: bold;
+	background-color: #FFF;
+	width: 20%;
+	border: 2px solid #999;
+	color: #666;
+	border-radius:5px;}
+}
+
+
+.addform {
+	font-size: x-large;
+}
+.actionlink {
+	font-size: small;
+	text-decoration: none;
+}
+.tableback {
+	background-color: #FFF;
+}
+.fatname {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: large;
+	color: #333;
+}
+.headrow {
+	font-family: Tahoma, Geneva, sans-serif;
+	color: #FFF;
+	background-color: #666;
+	font-weight: bold;
+}
+.editform {
+	width: 60%;
+	margin-right: 20%;
+	margin-left: 20%;
+	background-color: #FFF;
+	border: 1px solid #333;
+	border-radius:6px;
+}
+.formrubrik {
+	font-size: x-large;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.formbox {
+	width: 100%;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: large;
+}
+.formbutton {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: large;
+	width: 120px;
+	height: 40px;
+}

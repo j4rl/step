@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_rs" value="name:stepsID;datatype:int,name:namn;datatype:string,name:arbetslag;datatype:string,name:RO;datatype:string,name:steg;datatype:int,name:inlagt;datatype:timestamp,name:termin;datatype:string" />
+</info>
