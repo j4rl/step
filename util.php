@@ -35,12 +35,12 @@ function data(){
 	//return $connection
 };
 
-function topList($strRO){
+function topList($strLag){
 	//get all names
 	// SELECT * FROM tblNames WHERE RO=$strRO
-	$co=mysqli_connect("localhost", "root", "", "dynosaur_se");
+	$co=mysqli_connect("localhost", "root", "", "step");
 	if(!$co) die(mysqli_connect_error());
-	$sql="SELECT * FROM tblNames WHERE RO='".$strRO."'";
+	$sql="SELECT * FROM tbluser WHERE lag='".$strLag."'";
 	$result=mysqli_query($co, $sql);
 	if (mysqli_num_rows($result)>0){
 		while($row=mysqli_fetch_assoc($result)){
@@ -67,7 +67,7 @@ function showTopList($arrTopList,$numberOfNames) {
 
 
 class Database {
- 
+
     private $host;
     private $user;
     private $pass;
@@ -76,71 +76,69 @@ class Database {
     private $error;
     private $errno;
     private $query;
- 
-    function __construct($host, $user, $pass, $name = "", $conn = 1) {
-        $this -> host = $host;
-        $this -> user = $user;
-        $this -> pass = $pass;
-        if (!empty($name)) $this -> name = $name;      
-        if ($conn == 1) $this -> connect();
+
+    function __construct($host ="localhost", $user = "root", $pass ="", $name, $conn = 1) {
+        $this->host = $host;
+        $this->user = $user;
+        $this->pass = $pass;
+        if (!empty($name)) $this->name = $name;
+        if ($conn == 1) $this->connect();
     }
- 
+
     function __destruct() {
-        @mysql_close($this->link);
+        $this->close();
     }
- 
+
     public function connect() {
-        if ($this -> link = mysql_connect($this -> host, $this -> user, $this -> pass)) {
-            if (!empty($this -> name)) {
-                if (!mysqli_select_db($this -> name)) $this -> exception("Could not connect to the database!");
-            }
-        } else {
-            $this -> exception("Could not create database connection!");
+        $this->link = new mysqli($this->host, $this->user, $this->pass, $this->name);
+
+        if ($this->link->connect_errno) {
+            $this->exception("Could not create database connection!");
         }
     }
- 
+
     public function close() {
-        @mysql_close($this->link);
+        if ($this->link) {
+            $this->link->close();
+        }
     }
- 
+
     public function query($sql) {
-        if ($this->query = @mysql_query($sql)) {
+        if ($this->query = $this->link->query($sql)) {
             return $this->query;
         } else {
             $this->exception("Could not query database!");
             return false;
         }
     }
- 
+
     public function num_rows($qid) {
-        if (empty($qid)) {         
+        if (empty($qid)) {
             $this->exception("Could not get number of rows because no query id was supplied!");
             return false;
         } else {
-            return mysql_num_rows($qid);
+            return $qid->num_rows;
         }
     }
- 
+
     public function fetch_array($qid) {
         if (empty($qid)) {
             $this->exception("Could not fetch array because no query id was supplied!");
             return false;
         } else {
-            $data = mysql_fetch_array($qid);
+            return $qid->fetch_array();
         }
-        return $data;
     }
- 
+
     public function fetch_array_assoc($qid) {
         if (empty($qid)) {
             $this->exception("Could not fetch array assoc because no query id was supplied!");
             return false;
         } else {
-            $data = mysql_fetch_array($qid, MYSQL_ASSOC);
+            return $qid->fetch_assoc();
         }
-        return $data;
     }
- 
+
     public function fetch_all_array($sql, $assoc = true) {
         $data = array();
         if ($qid = $this->query($sql)) {
@@ -158,26 +156,17 @@ class Database {
         }
         return $data;
     }
- 
+
     public function last_id() {
-        if ($id = mysql_insert_id()) {
-            return $id;
-        } else {
-            return false;
-        }
+        return $this->link->insert_id;
     }
- 
+
     private function exception($message) {
-        if ($this->link) {
-            $this->error = mysql_error($this->link);
-            $this->errno = mysql_errno($this->link);
-        } else {
-            $this->error = mysql_error();
-            $this->errno = mysql_errno();
-        }
+        $this->error = $this->link->error;
+        $this->errno = $this->link->errno;
+
         if (PHP_SAPI !== 'cli') {
         ?>
- 
             <div class="alert-bad">
                 <div>
                     Database Error
@@ -201,10 +190,10 @@ class Database {
             </div>
         <?php
         } else {
-                    echo "MYSQL ERROR: " . ((isset($this->error) && !empty($this->error)) ? $this->error:'') . "\n";
-        };
+            echo "MYSQL ERROR: " . ((isset($this->error) && !empty($this->error)) ? $this->error:'') . "\n";
+        }
     }
- 
 }
+
 
 ?>

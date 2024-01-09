@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 08 jan 2024 kl 10:25
+-- Tid vid skapande: 08 jan 2024 kl 16:01
 -- Serverversion: 10.4.25-MariaDB
 -- PHP-version: 8.1.10
 
@@ -42,6 +42,8 @@ CREATE TABLE `tblsteps` (
 
 CREATE TABLE `tbluser` (
   `id` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `name` varchar(100) NOT NULL,
   `lag` varchar(100) NOT NULL,
   `userlevel` int(11) NOT NULL DEFAULT 10
