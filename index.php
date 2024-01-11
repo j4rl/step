@@ -10,6 +10,11 @@
 </head>
 <body>
     <header><img src="Mockelngymnasiet-logo-rgb-120.gif" alt="Logo"></header>
+    <?php if(!isset($_SESSION["uid"])){
+        //show login form
+    }else{
+        //show logout link
+    } ?>
     <nav>
         <a href="index.php">Hem</a>
         <a href="regsteps.php">Registrera&nbsp;steg</a>
