@@ -1,4 +1,17 @@
 <?php
+session_start();
+class LoginOut{
+
+    private $strUserTable;
+
+    function __construct($userTable){
+        $strUserTable=$userTable;
+    }
+    function check($uname, $pword){
+        return ;
+    }
+}
+
 /**
  * Crypt
  */
@@ -93,7 +106,7 @@ class Database extends Crypt
      */
     public function delRow($ID,$table){
         $strTable=strtolower(substr($table,3,strlen($table)));
-        $tmpSTrID=$strTable."ID";
+        $tmpSTrID="id";
         $query=$this->fix("DELETE FROM $table WHERE $tmpSTrID=$ID");
         return $this->mysqli->query($query);
     }
