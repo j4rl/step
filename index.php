@@ -9,7 +9,7 @@
 	<script src="app.js"></script>
 </head>
 <body>
-    <header><img src="Mockelngymnasiet-logo-rgb-120.gif" alt="Logo"></header>
+    <header><img src="Mockelngymnasiet-logo-rgb-120.gif" alt="Logo">Stegtävling</header>
     <?php if(!isset($_SESSION["uid"])){
         //show login form
     }else{
@@ -22,7 +22,11 @@
 		<?php if(!isLoggedIn()){ ?><a href="reguser.php">Registrera&nbsp;användare</a><?php }; ?>
 		<?php if(isLoggedIn()){ ?><a href="logout.php">Logga&nbsp;ut</a><?php }else{ ?><a href="login.php">Logga&nbsp;in</a><?php }; ?>
     </nav>
-    <main></main>
+    <main>
+        <section>
+            <h1><?=$compname?></h1>
+        </section>
+    </main>
     <footer class="cen">&copy;j4rl</footer>
     
 </body>
