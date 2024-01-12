@@ -18,7 +18,7 @@
     <nav>
         <a href="index.php">Hem</a>
 		<?php if(isLoggedIn()){ ?><a href="regsteps.php">Registrera&nbsp;steg</a><?php }; ?>       
-        <?php if(isAdmin()){ ?><a href="admin.php">Admin</a><?php }; ?>
+        <?php if(isLevel(100)){ ?><a href="admin.php">Admin</a><?php }; ?>
 		<?php if(!isLoggedIn()){ ?><a href="reguser.php">Registrera&nbsp;användare</a><?php }; ?>
 		<?php if(isLoggedIn()){ ?><a href="logout.php">Logga&nbsp;ut</a><?php }else{ ?><a href="login.php">Logga&nbsp;in</a><?php }; ?>
     </nav>
