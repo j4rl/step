@@ -1,4 +1,4 @@
-<?php require_once("func.php");  ?>
+<?php require_once("func.php") ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +10,11 @@
 </head>
 <body>
     <header><img src="Mockelngymnasiet-logo-rgb-120.gif" alt="Logo"></header>
+    <?php if(!isset($_SESSION["uid"])){
+        //show login form
+    }else{
+        //show logout link
+    } ?>
     <nav>
         <a href="index.php">Hem</a>
 		<?php if(isLoggedIn()){ ?><a href="regsteps.php">Registrera&nbsp;steg</a><?php }; ?>       

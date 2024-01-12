@@ -1,12 +1,36 @@
 <?php
 session_start();
-function isLoggedIn() {
-    return true;
-}
-function isAdmin() {
-    return true;
+$db=new Database("step");
+$db->setUserTable="tbluser";
+
+
+function server(){
+    return $_SERVER['HTTP_HOST'];
 }
 
+
+function isLevel($level){
+    $succ=false;
+    if(isset($_SESSION["lvl"])){
+        $sessLevel=intval($_SESSION["lvl"]);
+        if($sessLevel<$level){
+            $succ=false;
+        }else{
+            $succ=true;
+        }
+    }
+    return $succ;
+}
+
+function isLoggedIn(){
+    return isLevel(10);
+}
+
+
+function fixDate($var){
+    $date=date('Y-m-d H:i', $var);
+    return $date;
+}
 /**
  * Crypt
  */
@@ -59,7 +83,8 @@ class Crypt{
  */
 class Database extends Crypt
 {
-
+    private $userTable;
+    public $loggedIn=false;
     /**
      * Constructor
      * connects to a database with the given parameters otherwise default values are set.
@@ -79,6 +104,7 @@ class Database extends Crypt
      */
     public function fix($strFix){
         $strFix=htmlspecialchars($strFix);
+        $strFix=htmlentities($strFix, ENT_QUOTES);
         return $this->mysqli->real_escape_string($strFix);
     }
     /**
@@ -100,12 +126,35 @@ class Database extends Crypt
      * @return boolean
      */
     public function delRow($ID,$table){
-        $strTable=strtolower(substr($table,3,strlen($table)));
-        $tmpSTrID=$strTable."ID";
+        //$strTable=strtolower(substr($table,3,strlen($table)));
+        $tmpSTrID="id";
         $query=$this->fix("DELETE FROM $table WHERE $tmpSTrID=$ID");
         return $this->mysqli->query($query);
     }
+    public function setUserTable($utable){
+        $userTable=$utable;
+    }
 
+    public function checkUser($username,$password){
+        $pass=md5($password);
+        $table=$this->$userTable;
+        $query=$this->fix("SELECT * FROM $table WHERE username=$username AND password=$pass");
+        $result=$this->mysqli->query($query);
+        if($row=$result->fetch_assoc()){
+            if($result->numRows==1){
+                $_SESSION["uid"]=$row["id"];
+                $_SESSION["name"]=$row["name"];
+                $_SESSION["lvl"]=$row["userlevel"];
+                $this->$loggedIn=true;
+                return true;
+            }else{
+                session_destroy();
+                $this->$loggedIn=false;
+                return false;
+            }
+        }
+
+    }
     /**
     * data2JSON
     * Returns data from database formatted as JSON with the object name data
