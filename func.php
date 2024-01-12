@@ -1,4 +1,12 @@
 <?php
+session_start();
+function isLoggedIn() {
+    return true;
+}
+function isAdmin() {
+    return true;
+}
+
 /**
  * Crypt
  */
