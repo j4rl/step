@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <?php
-    require_once('../../func.php');
-    $conn=makeConn('can');
-
+    require_once('func.php');
+    if(!isLevel(100)) header("Location: index.php");
     //Is editform submitted?
     if(isset($_POST['btn'])){
         $id=$_POST['id'];
@@ -10,10 +9,9 @@
         $pass=$_POST['pwd'];
         $level=intval($_POST['lvl']);
         $real=$_POST['real'];
-        $last=intval($_POST['lastlogin']);
-        $sql="UPDATE tbluser SET user='$user', pass='$pass', realname='$real', lastlogin=$last, level=$level WHERE id=$id";
-        $result=mysqli_query($conn, $sql);
-        header("Location: listuser.php");
+        $sql="UPDATE tbluser SET username='$user', password='$pass', name='$real', userlevel=$level WHERE userid=$id";
+        $result=$db->runQuery($sql);
+        header("Location: adm_dash.php");
     }
 
 ?>
@@ -21,40 +19,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit user</title>
-    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<?php require_once("../../includes/_aheader.php"); ?>
-<?php require_once("../../includes/_menu.php"); ?>
+
  
 <div class="main">
     <?php
 //first time around, lets check if we got a redirection from listuser (is there a $_GET)?
     if(isset($_GET['edit'])){
-        $id=$_GET['edit'];
-        $sql="SELECT * FROM tbluser WHERE id=$id";
-        $result=mysqli_query($conn, $sql);
-        $user=mysqli_fetch_assoc($result);
+        $id=intval($_GET['edit']);
+        $sql="SELECT * FROM tbluser WHERE userid=$id";
+        $result=$db->runQuery($sql);
+        $user=$result->fetch_assoc();
 ?>
-    <form method="post" action="edituser.php"><h1>Edit user</h1>
-        <input type="text" name="real" value="<?=$user['realname']?>">
-        <input type="hidden" name="id" value="<?=$user['id']?>">
-        <input type="text" name="fakeid" value="<?=$user['id']?>" disabled>
-        <input type="text" name="usr" value="<?=$user['user']?>">
-        <input type="hidden" name="pwd" value="<?=$user['pass']?>">
-        <input type="password" name="fakepwd" value="<?=$user['pass']?>" disabled>
-        <input type="hidden" name="lastlogin" value="<?=$user['lastlogin']?>">
-        <input type="text" name="fakelogin" value="<?=fixDate($user['lastlogin'])?>" disabled>
+    <form method="post" action="edituser.php"><h1>Ändra användare</h1>
+        <input type="text" name="real" value="<?=$user['name']?>">
+        <input type="hidden" name="id" value="<?=$user['userid']?>">
+        <input type="text" name="fakeid" value="<?=$user['userid']?>" disabled>
+        <input type="text" name="usr" value="<?=$user['username']?>">
+        <input type="hidden" name="pwd" value="<?=$user['password']?>">
+        <input type="password" name="fakepwd" value="<?=$user['password']?>" disabled>
         <div class="fullformdiv">
-            <input type="range" name="lvl" id="lvl" min="1" max="200" value="<?=$user['level']?>" onchange="showLevel()">
+            <input type="range" name="lvl" id="lvl" min="1" max="200" value="<?=$user['userlevel']?>" onchange="showLevel()">
             <span id="nrlevel"></span>
         </div>
-        <input type="submit" value="Submit changes" name="btn">
+        <input type="submit" value="Skicka" name="btn">
     </form>
 <?php  } ?>
 
-</div>  
-<?php require_once("../../includes/_footer.php"); ?>       
+</div>      
 </body>
 </html>
 <script>

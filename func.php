@@ -1,8 +1,30 @@
 <?php
 session_start();
-$db=new Database("step");
-$db->setUserTable="tbluser";
+$db=new Database("mockelngymnasie");
 
+function makeConn($dbname, $dbserver="localhost", $dbuser="root", $dbpass=""){
+    $conn=mysqli_connect($dbserver,$dbuser,$dbpass,$dbname);
+    return $conn;
+}
+
+function dateDiff($startDate, $endDate){
+    // Konvertera datumsträngarna till timestamps
+    $startTimestamp = strtotime($startDate);
+    $endTimestamp = strtotime($endDate);
+
+    // Beräkna antalet sekunder mellan de två timestampen
+    $differenceInSeconds = $endTimestamp - $startTimestamp;
+
+    // Omvandla antalet sekunder till dagar
+    $daysDifference = floor($differenceInSeconds / (60 * 60 * 24));
+
+    return $daysDifference;
+
+}
+
+function maxCompSteps($comp){
+    
+}
 
 function server(){
     return $_SERVER['HTTP_HOST'];
@@ -31,6 +53,10 @@ function fixDate($var){
     $date=date('Y-m-d H:i', $var);
     return $date;
 }
+
+
+
+
 /**
  * Crypt
  */
@@ -83,7 +109,7 @@ class Crypt{
  */
 class Database extends Crypt
 {
-    private $userTable;
+    private $userTable="tbluser";
     public $loggedIn=false;
     /**
      * Constructor
@@ -93,7 +119,7 @@ class Database extends Crypt
      * @param string $username (default value root)
      * @param string $password (default value blank)
      */
-    function __construct($db_name, $host="localhost", $username="root", $password="") {
+    function __construct($db_name, $host="localhost", $username="mockelngymnasie", $password="PPeTExVh") {
         $this->mysqli = mysqli_connect($host, $username, $password, $db_name);
     }
     /**
@@ -126,8 +152,8 @@ class Database extends Crypt
      * @return boolean
      */
     public function delRow($ID,$table){
-        //$strTable=strtolower(substr($table,3,strlen($table)));
-        $tmpSTrID="id";
+        $strTable=strtolower(substr($table,3,strlen($table)));
+        $tmpSTrID=$strTable."id";
         $query=$this->fix("DELETE FROM $table WHERE $tmpSTrID=$ID");
         return $this->mysqli->query($query);
     }
@@ -137,19 +163,20 @@ class Database extends Crypt
 
     public function checkUser($username,$password){
         $pass=md5($password);
-        $table=$this->$userTable;
-        $query=$this->fix("SELECT * FROM $table WHERE username=$username AND password=$pass");
+        $user=$this->fix($username);
+
+        $query="SELECT * FROM tbluser WHERE username='$username' AND password='$pass'";
         $result=$this->mysqli->query($query);
         if($row=$result->fetch_assoc()){
-            if($result->numRows==1){
+            if($result->num_rows==1){
                 $_SESSION["uid"]=$row["id"];
                 $_SESSION["name"]=$row["name"];
                 $_SESSION["lvl"]=$row["userlevel"];
-                $this->$loggedIn=true;
+                //$this->$loggedIn=true;
                 return true;
             }else{
                 session_destroy();
-                $this->$loggedIn=false;
+                //$this->$loggedIn=false;
                 return false;
             }
         }

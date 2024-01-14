@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Värd: 127.0.0.1
--- Tid vid skapande: 12 jan 2024 kl 00:20
--- Serverversion: 10.4.32-MariaDB
--- PHP-version: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Jan 14, 2024 at 06:08 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,77 +18,83 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Databas: `step`
+-- Database: `step`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `tblcomp`
+-- Table structure for table `tblcomp`
 --
 
 CREATE TABLE `tblcomp` (
-  `id` int(11) NOT NULL,
+  `compid` int(11) NOT NULL,
   `compname` varchar(200) NOT NULL,
   `startdate` date NOT NULL,
   `stopdate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumpning av Data i tabell `tblcomp`
+-- Dumping data for table `tblcomp`
 --
 
-INSERT INTO `tblcomp` (`id`, `compname`, `startdate`, `stopdate`) VALUES
-(1, 'Test', '2024-01-11', '2029-01-10');
+INSERT INTO `tblcomp` (`compid`, `compname`, `startdate`, `stopdate`) VALUES
+(1, 'Test', '2024-01-11', '2029-01-10'),
+(3, 'Klutt', '2024-01-25', '2024-01-25');
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `tblsteps`
+-- Table structure for table `tblsteps`
 --
 
 CREATE TABLE `tblsteps` (
-  `id` int(11) NOT NULL,
-  `userid` int(11) NOT NULL,
+  `stepsid` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `comp` int(11) NOT NULL,
   `steps` int(11) NOT NULL,
   `posted` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumpning av Data i tabell `tblsteps`
+-- Dumping data for table `tblsteps`
 --
 
-INSERT INTO `tblsteps` (`id`, `userid`, `steps`, `posted`) VALUES
-(1, 1, 2345, '2024-01-11 21:55:29');
+INSERT INTO `tblsteps` (`stepsid`, `user`, `comp`, `steps`, `posted`) VALUES
+(1, 1, 0, 2345, '2024-01-11 21:55:29'),
+(2, 0, 1, 1200, '2024-01-14 03:20:37'),
+(3, 0, 1, 122, '2024-01-14 03:35:23');
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `tblteam`
+-- Table structure for table `tblteam`
 --
 
 CREATE TABLE `tblteam` (
-  `id` int(11) NOT NULL,
+  `teamid` int(11) NOT NULL,
   `teamname` varchar(200) NOT NULL,
   `teamleader` int(11) NOT NULL,
   `wins` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumpning av Data i tabell `tblteam`
+-- Dumping data for table `tblteam`
 --
 
-INSERT INTO `tblteam` (`id`, `teamname`, `teamleader`, `wins`) VALUES
-(3, 'Wolfpack', 1, NULL);
+INSERT INTO `tblteam` (`teamid`, `teamname`, `teamleader`, `wins`) VALUES
+(3, 'Wolfpack', 4, 3),
+(4, 'Gurkan', 5, NULL),
+(5, 'Fjärtisarna', 1, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `tbluser`
+-- Table structure for table `tbluser`
 --
 
 CREATE TABLE `tbluser` (
-  `id` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -97,68 +103,73 @@ CREATE TABLE `tbluser` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumpning av Data i tabell `tbluser`
+-- Dumping data for table `tbluser`
 --
 
-INSERT INTO `tbluser` (`id`, `username`, `password`, `name`, `team`, `userlevel`) VALUES
-(1, 'jlc', '1a1dc91c907325c69271ddf0c944bc72', 'Charlie Jarl', 3, 100),
-(2, 'bak', '1a1dc91c907325c69271ddf0c944bc72', 'Bengt Karlsson', 0, 10);
+INSERT INTO `tbluser` (`userid`, `username`, `password`, `name`, `team`, `userlevel`) VALUES
+(1, 'jlc', '1a1dc91c907325c69271ddf0c944bc72', 'Charlie Jarl', 3, 124),
+(4, 'mao', '1a1dc91c907325c69271ddf0c944bc72', 'Ola Magnell', NULL, 10),
+(5, 'kab', '1a1dc91c907325c69271ddf0c944bc72', 'Bert Karlsson', NULL, 10),
+(8, 'btc', 'dc647eb65e6711e155375218212b3964', 'Bertolomeus Crenshaw', NULL, 10);
 
 --
--- Index för dumpade tabeller
+-- Indexes for dumped tables
 --
 
 --
--- Index för tabell `tblcomp`
+-- Indexes for table `tblcomp`
 --
 ALTER TABLE `tblcomp`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`compid`);
 
 --
--- Index för tabell `tblsteps`
+-- Indexes for table `tblsteps`
 --
 ALTER TABLE `tblsteps`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`stepsid`),
+  ADD KEY `user` (`user`,`comp`);
 
 --
--- Index för tabell `tblteam`
+-- Indexes for table `tblteam`
 --
 ALTER TABLE `tblteam`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`teamid`),
+  ADD KEY `teamleader` (`teamleader`);
 
 --
--- Index för tabell `tbluser`
+-- Indexes for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`userid`),
+  ADD KEY `team` (`team`);
 
 --
--- AUTO_INCREMENT för dumpade tabeller
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT för tabell `tblcomp`
+-- AUTO_INCREMENT for table `tblcomp`
 --
 ALTER TABLE `tblcomp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `compid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT för tabell `tblsteps`
+-- AUTO_INCREMENT for table `tblsteps`
 --
 ALTER TABLE `tblsteps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `stepsid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT för tabell `tblteam`
+-- AUTO_INCREMENT for table `tblteam`
 --
 ALTER TABLE `tblteam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `teamid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT för tabell `tbluser`
+-- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
