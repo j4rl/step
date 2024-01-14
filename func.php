@@ -2,10 +2,6 @@
 session_start();
 $db=new Database("mockelngymnasie");
 
-function makeConn($dbname, $dbserver="localhost", $dbuser="mockelngymnasie", $dbpass="PPeTExVh"){
-    $conn=mysqli_connect($dbserver,$dbuser,$dbpass,$dbname);
-    return $conn;
-}
 
 function dateDiff($startDate, $endDate){
     // Konvertera datumsträngarna till timestamps
@@ -130,7 +126,7 @@ class Database extends Crypt
      */
     public function fix($strFix){
         $strFix=htmlspecialchars($strFix);
-        $strFix=htmlentities($strFix, ENT_QUOTES);
+        //$strFix=htmlentities($strFix, ENT_QUOTES);
         return $this->mysqli->real_escape_string($strFix);
     }
     /**
@@ -169,7 +165,7 @@ class Database extends Crypt
         $result=$this->mysqli->query($query);
         if($row=$result->fetch_assoc()){
             if($result->num_rows==1){
-                $_SESSION["uid"]=$row["id"];
+                $_SESSION["uid"]=$row["userid"];
                 $_SESSION["name"]=$row["name"];
                 $_SESSION["lvl"]=$row["userlevel"];
                 //$this->$loggedIn=true;
@@ -214,7 +210,7 @@ class Database extends Crypt
     public function getAll($table)
     {
         $query = $this->fix("SELECT * FROM $table");
-        return $this->mysqli->query($query)->fetch_all();
+        return $this->mysqli->query($query)->fetch_assoc();
     }
     /**
      * close
