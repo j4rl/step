@@ -14,7 +14,6 @@
     <nav>
         <a href="index.php">Tillbaka</a>
         <a href="adm_dash.php">Admin&nbsp;hem</a>
-        <a href="reguser.php">Ny&nbsp;stegtävling</a>
     </nav>
     <main>
         <div class="row">
@@ -24,11 +23,12 @@
         </section>
         <section class="adm_steps">
             <h1>Steg</h1>
+            <p>Denna funktion är inte tillgänglig än</p>
             <!-- Lista allas steginlämningar -->
             <form action="adm_dash.php" method="post">
                 <label for="stepsearch">Sök användare</label>
-                <input type="search" name="stepsearch" id="stepsearch" placeholder="Skriv namn eller användarnamn">
-                <input type="submit" name="btn" value="Sök">
+                <input type="search" name="stepsearch" id="stepsearch" placeholder="Skriv namn eller användarnamn" disabled>
+                <input type="submit" name="btn" value="Sök" disabled>
             </form>
         </section>            
         </div>

@@ -5,7 +5,7 @@
         $compid=intval($_POST['comp']);
         $steps=intval($_POST['steps']);
         $userid=intval($_SESSION['uid']);
-       $sql="INSERT INTO tblsteps (steps, userid, compid) VALUES ($steps, $userid, $compid)";
+       $sql="INSERT INTO tblsteps (steps, user, comp) VALUES ($steps, $userid, $compid)";
        $result=$db->runQuery($sql);
        header("Location: index.php");
 

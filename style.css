@@ -161,6 +161,7 @@ body{ /* detta är vanlig 'body reset' */
     padding: 1rem;
     margin: 1rem;
     border-radius: 1rem;
+    overflow-y: auto;
   }
   .password-match {
     color: green;

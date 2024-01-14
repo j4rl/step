@@ -31,7 +31,7 @@
         $result=$db->runQuery($sql);
         $team=$result->fetch_assoc();
         $query="SELECT userid, name FROM tbluser ORDER BY name";
-        $res=m$db->runQuery($query);
+        $res=$db->runQuery($query);
 ?>
     <form method="post" action="editteam.php"><h1>Ändra lag</h1>
         <label for="team">Lagnamn</label>
@@ -40,13 +40,12 @@
         <label for="fakeid">Lag id</label>
         <input type="text" name="fakeid" value="<?=$team['teamid']?>" disabled>
         <label for="lead">Lagledare</label>
-        <input list="users" name="lead" id="lead">
-            <datalist id="users">
-                <?php while($user=$res->fetch_assoc();){ ?>
+        <select name="lead" id="lead">
+                <?php while($user=$res->fetch_assoc()){ ?>
                    <? if($user['userid']==$team['teamleader']) echo "selected" ?>  
                       <option value="<?=$user['userid']?>" <?php if($user['userid']==$team['teamleader']) echo "selected"; ?> ><?=$user['name']?></option>
                <?php } ?>
-            </datalist>
+                </select>
         <input type="submit" value="Skicka" name="btn">
     </form>
 <?php  } ?>
