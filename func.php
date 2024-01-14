@@ -2,7 +2,7 @@
 session_start();
 $db=new Database("mockelngymnasie");
 
-function makeConn($dbname, $dbserver="localhost", $dbuser="root", $dbpass=""){
+function makeConn($dbname, $dbserver="localhost", $dbuser="mockelngymnasie", $dbpass="PPeTExVh"){
     $conn=mysqli_connect($dbserver,$dbuser,$dbpass,$dbname);
     return $conn;
 }

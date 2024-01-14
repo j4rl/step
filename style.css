@@ -183,7 +183,7 @@ body{ /* detta är vanlig 'body reset' */
   background: var(--sec_color);
   padding: 0.5rem 1rem .5rem 1rem;
 }
-section a{
+.blink{
   display:inline-block;
   text-decoration: none;
   width:fit-content;

@@ -54,7 +54,7 @@
                     <div class="team"><b><?=$team['rank']?></b>: <span class="team_name"><?=$team['team_name']?></span> <?=$team['total_steps']?> steg</div>
               <?php  } ?>
 
-                <?php if(isLoggedIn()){ ?><a href="regsteps.php?comp=<?=$row['compid']?>">Registrera&nbsp;steg</a><?php }; ?>
+                <?php if(isLoggedIn()){ ?><a href="regsteps.php?comp=<?=$row['compid']?>" class="blink">Registrera&nbsp;steg</a><?php }; ?>
            <?php } ?>
         </section>
         <?php if(isLoggedIn()){ ?>
