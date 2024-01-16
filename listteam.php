@@ -13,15 +13,16 @@
 ?>
 
         <div class="main">
-            <div class="container"><h1>Lag<?php if(isLevel(100)){ ?>&nbsp;&nbsp;<a href="addteam.php"><img src="icons/add.png"></a><?php } ?></h1></div>
+            <div class="container"><h1>Lag<?php if(isLevel(100)){ ?>&nbsp;&nbsp;<a href="addteam.php"><i class="fi fi-rr-add"></i></a><?php } ?></h1></div>
             <?php while($row=$r->fetch_assoc()){ ?>
                     <div class="row">
                         <div class="usr_row">
                             <b><?=$row['teamname']?></b>
-                            &nbsp;Lagledare: <span class="mono"><?=$row['name']?></span>
-                            <?php if(intval($row['wins'])){ ?>&nbsp;Antal vinster: <span><?=$row['wins']?></span><?php }  ?>
-                            <?php if(isLevel(100)){ ?><a href="delteam.php?del=<?=$row['teamid']?>"><img src="icons/delete.png"></a><?php } ?>
-                            <?php if(isLevel(100)){ ?><a href="editteam.php?edit=<?=$row['teamid']?>"><img src="icons/edit.png"></a><?php } ?>
+                            &nbsp;Lagledare:&nbsp;<span class="mono"><?=$row['name']?></span>
+                            <?php if(intval($row['wins'])){ ?>&nbsp;Antal vinster:&nbsp;<span><?=$row['wins']?></span><?php }  ?>
+                            <span class="grow">&nbsp;</span>
+                            <?php if(isLevel(100)){ ?><a href="delteam.php?del=<?=$row['teamid']?>"><i class="fi fi-rr-trash"></i></a><?php } ?>
+                            <?php if(isLevel(100)){ ?><a href="editteam.php?edit=<?=$row['teamid']?>"><i class="fi fi-rr-edit"></i></a><?php } ?>
                         </div>                        
                     </div>
             <?php  } ?>

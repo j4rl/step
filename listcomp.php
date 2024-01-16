@@ -12,15 +12,16 @@
 ?>
 
         <div class="main">
-            <div class="container"><h1>Tävlingar<?php if(isLevel(100)){ ?>&nbsp;&nbsp;<a href="addcomp.php"><img src="icons/add.png"></a><?php } ?></h1></div>
+            <div class="container"><h1>Tävlingar<?php if(isLevel(100)){ ?>&nbsp;&nbsp;<a href="addcomp.php"><i class="fi fi-rr-add"></i></a><?php } ?></h1></div>
             <?php while($row=$result->fetch_assoc()){ ?>
                     <div class="row">
                         <div class="usr_row">
                             <b><?=$row['compname']?></b>
-                            &nbsp;Start: <span class="mono"><?=$row['startdate']?></span>
-                            &nbsp;Slut: <span class="mono"><?=$row['stopdate']?></span>
-                            <?php if(isLevel(100)){ ?><a href="delcomp.php?del=<?=$row['compid']?>"><img src="icons/delete.png"></a><?php } ?>
-                            <?php if(isLevel(100)){ ?><a href="editcomp.php?edit=<?=$row['compid']?>"><img src="icons/edit.png"></a><?php } ?>
+                            &nbsp;Start:&nbsp;<span class="mono"><?=$row['startdate']?></span>
+                            &nbsp;&nbsp;Slut:&nbsp;<span class="mono"><?=$row['stopdate']?></span>
+                            <span class="grow">&nbsp;</span>
+                            <?php if(isLevel(100)){ ?><a href="delcomp.php?del=<?=$row['compid']?>"><i class="fi fi-rr-trash"></i></a><?php } ?>
+                            <?php if(isLevel(100)){ ?><a href="editcomp.php?edit=<?=$row['compid']?>"><i class="fi fi-rr-edit"></i></a><?php } ?>
                         </div>                        
                     </div>
             <?php  } ?>

@@ -13,16 +13,17 @@
 ?>
 
         <div class="main">
-            <div class="container"><h1>Användare<?php if(isLevel(100)){ ?>&nbsp;&nbsp;<a href="adduser.php"><img src="icons/add.png"></a><?php } ?></h1></div>
+            <div class="container"><h1>Användare<?php if(isLevel(100)){ ?>&nbsp;&nbsp;<a href="adduser.php"><i class="fi fi-rr-user-add"></i></a><?php } ?></h1></div>
             <?php while($row=$result->fetch_assoc()){ ?>
                     <div class="row">
                         <div class="usr_row">
                             <b><?=$row['name']?></b>
-                            &nbsp;Användarnamn: <span class="mono"><?=$row['username']?></span>
-                            &nbsp;Nivå: <span class="mono"><?=$row['userlevel']?></span>
-                            <?php if(strlen($row['teamname'])){ ?>&nbsp;Lag: <span><?=$row['teamname']?></span><?php }  ?>
-                            <?php if(isLevel(100)){ ?><a href="deluser.php?del=<?=$row['userid']?>"><img src="icons/delete.png"></a><?php } ?>
-                            <?php if(isLevel(100)){ ?><a href="edituser.php?edit=<?=$row['userid']?>"><img src="icons/edit.png"></a><?php } ?>
+                            &nbsp;Användarnamn:&nbsp;<span class="mono"><?=$row['username']?></span>
+                            &nbsp;Nivå:&nbsp;<span class="mono"><?=$row['userlevel']?></span>
+                            <?php if(strlen($row['teamname'])){ ?><span>&nbsp;Lag: <?=$row['teamname']?></span><?php }  ?>
+                            <span class="grow">&nbsp;</span>
+                            <?php if(isLevel(100)){ ?><a href="deluser.php?del=<?=$row['userid']?>"><i class="fi fi-rr-trash"></i></a></i><?php } ?>
+                            <?php if(isLevel(100)){ ?><a href="edituser.php?edit=<?=$row['userid']?>"><i class="fi fi-rr-edit"></i></a><?php } ?>
                         </div>                        
                     </div>
             <?php  } ?>
