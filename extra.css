@@ -1,0 +1,12 @@
+@import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+body{
+    padding:3rem 20% 0% 20%;
+    display:flex;
+    flex-wrap: wrap;
+    gap:1rem;
+    font:3rem sans-serif;
+}
+
+i{
+    --font-size:10px;
+}
