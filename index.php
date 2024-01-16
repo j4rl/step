@@ -44,7 +44,6 @@
                 JOIN tblsteps ON tblcomp.compid = tblsteps.user
                 JOIN tbluser ON tblsteps.user = tbluser.userid
                 JOIN tblteam ON tbluser.team = tblteam.teamid
-                WHERE tblcomp.compid=1
                 GROUP BY tblcomp.compid, tblteam.teamid
                 ) AS subquery
             WHERE rank <= 5
@@ -62,6 +61,7 @@
             <h1><?=$_SESSION['name']?></h1>
             <?php 
                 $uid = intval($_SESSION['uid']);
+                $team=intval($_SESSION['team']);
                 $totSteps=0;
                 $query="SELECT * FROM tblsteps WHERE user=$uid ORDER BY posted DESC";
                 $result=$db->runQuery($query);
@@ -70,6 +70,25 @@
                     <div class="steprow"><?=$row['posted']?>&nbsp;&nbsp;<b><?=$row['steps']?></b></div>
               <?php  }  ?>
               <p>Totalt antal steg: <b><?=$totSteps?></b></p>
+              <?php 
+                $sql="SELECT * FROM tblteam WHERE teamid=$team";
+                $res=$db->runQuery($sql);
+                $t=$res->fetch_assoc();
+                $teamname=$t['teamname'];
+                $totsteps=0;
+                $sql="SELECT * FROM tbluser WHERE team=$team";
+                $res=$db->runQuery($sql);
+                $members=$res->num_rows;
+                $sql="SELECT DISTINCT * FROM tbluser WHERE team=$team";
+                $result=$db->runQuery($sql);
+                while ($row=$result->fetch_assoc()){ ?>
+                    <div class="row">
+                        <b><?=$row['name']?></b>&nbsp;&nbsp;<?=getUserSteps(intval($row['userid']))?>
+                    </div>
+              <?php  }
+              ?>
+              <h2><?=$teamname?></h2>
+              <p>Totalt antal steg:&nbsp;<?=$totsteps?></p>
         </section>
         <?php }; ?>
         </div>

@@ -90,7 +90,18 @@ body{ /* detta är vanlig 'body reset' */
     font-family: "Roboto Slab", serif;
     color:var(--accent);
   }
-
+  h1{
+    font-size: xx-large;
+  }
+  h2{
+    font-size: x-large;
+  }
+  h3{
+    font-size: larger;
+  }
+  h4{
+    font-size: large;
+  }
   /*
   Lägg märke till att bildens storlek hänger med figure-taggens storlek när man resizar sidan.
   Det är därför man har width 100% på img.

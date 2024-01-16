@@ -50,6 +50,26 @@ function fixDate($var){
     return $date;
 }
 
+function getUserSteps($uid){
+    $totsteps=0;
+    $d=new Database("mockelngymnasie");
+    $sql="SELECT * FROM tblsteps WHERE user = $uid";
+    $res=$d->runQuery($sql);
+    while($row=$res->fetch_assoc()){
+        $totsteps+=$row['steps'];
+    }
+    return $totsteps;
+}
+function getTeamSteps($teamid){
+    $totsteps=0;
+    $d=new Database("mockelngymnasie");
+    $sql="SELECT * FROM tblsteps JOIN WHERE team = $teamid";
+    $res=$d->runQuery($sql);
+    while($row=$res->fetch_assoc()){
+        $totsteps+=$row['steps'];
+    }
+    return $totsteps;
+}
 
 
 
@@ -168,6 +188,7 @@ class Database extends Crypt
                 $_SESSION["uid"]=$row["userid"];
                 $_SESSION["name"]=$row["name"];
                 $_SESSION["lvl"]=$row["userlevel"];
+                $_SESSION["team"]=$row["team"];
                 //$this->$loggedIn=true;
                 return true;
             }else{
