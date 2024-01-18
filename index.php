@@ -3,7 +3,7 @@
         $today = date("Y-m-d");
         $sql="SELECT * FROM tblcomp WHERE startdate<'$today' AND stopdate>'$today'";
         $result=$db->runQuery($sql);
-
+        $db->updateCompTotSteps();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,8 +18,7 @@
     <header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Stegtävling</header>
     <nav>
         <div class="menu">
-        <a href="index.php">Hem</a>
-            <?php if(isLoggedIn()){ ?><a href="regsteps.php">Registrera&nbsp;steg</a><?php }; ?>       
+        <a href="index.php">Hem</a>     
             <?php if(isLevel(100)){ ?><a href="adm_dash.php">Admin</a><?php }; ?>
             <?php if(!isLoggedIn()){ ?><a href="reguser.php">Registrera&nbsp;användare</a><?php }; ?>
         </div>
@@ -29,28 +28,20 @@
         <div class="row">
         <section>
             <h1>Aktuella tävlingar</h1>
-            <?php while($row=$result->fetch_assoc()) { ?>
+            <?php while($row=$result->fetch_assoc()) { 
+                $comp=intval($row['compid']);
+                $comptot=$db->getTotStepsForComp($comp);?>
                 <h2><?=$row['compname']?></h2>
                 <p>Håller på från <?=$row['startdate']?> och slutar <?=$row['stopdate']?> det är <?=dateDiff($row['startdate'],$row['stopdate'])?> dagar kvar</p>
                  <?php 
-                $query="SELECT competition_name, team_name, total_steps, rank
-            FROM (
-                SELECT
-                    tblcomp.compname AS competition_name,
-                    tblteam.teamname AS team_name,
-                    COALESCE(SUM(tblsteps.steps), 0) AS total_steps,
-                    ROW_NUMBER() OVER (PARTITION BY tblcomp.compid ORDER BY COALESCE(SUM(tblsteps.steps), 0) DESC) AS rank
-                FROM tblcomp
-                JOIN tblsteps ON tblcomp.compid = tblsteps.user
-                JOIN tbluser ON tblsteps.user = tbluser.userid
-                JOIN tblteam ON tbluser.team = tblteam.teamid
-                GROUP BY tblcomp.compid, tblteam.teamid
-                ) AS subquery
-            WHERE rank <= 5
-            ORDER BY competition_name, rank DESC;";
+                $query="SELECT team, SUM(steps) AS totsteps FROM tblsteps WHERE comp = $comp GROUP BY team ORDER BY totsteps DESC LIMIT 5";
                 $res=$db->runQuery($query);
-                while($team=$res->fetch_assoc()){ ?>
-                    <div class="team"><b><?=$team['rank']?></b>: <span class="team_name"><?=$team['team_name']?></span> <?=$team['total_steps']?> steg</div>
+                $i=0;
+                while($team=$res->fetch_assoc()){ 
+                    $i++;
+                    $barsize=intval(100*($team['totsteps']/$comptot)); ?>
+                    <div class="row"><b><?=$i?></b>&nbsp;&nbsp;<span class="team_name"><?=$db->getTeamName($team['team'])?></span><span class="grow">&nbsp;</span> <?=$team['totsteps']?> steg</div>
+                    <p class="bar"><img src="bar.gif" width="<?=$barsize?>%"></p>
               <?php  } ?>
 
                 <?php if(isLoggedIn()){ ?><a href="regsteps.php?comp=<?=$row['compid']?>" class="blink">Registrera&nbsp;steg</a><?php }; ?>
@@ -59,23 +50,25 @@
         <?php if(isLoggedIn()){ ?>
         <section>
             <h1><?=$_SESSION['name']?></h1>
+            <h6>Senaste registreringar</h6>
             <?php 
                 $uid = intval($_SESSION['uid']);
                 $team=intval($_SESSION['team']);
                 $totSteps=0;
-                $query="SELECT * FROM tblsteps WHERE user=$uid ORDER BY posted DESC";
+                $query="SELECT * FROM tblsteps WHERE user=$uid ORDER BY posted DESC LIMIT 5";
                 $result=$db->runQuery($query);
                 while($row = $result->fetch_assoc()) { 
                     $totSteps+=intval($row['steps']); ?>
-                    <div class="steprow"><?=$row['posted']?>&nbsp;&nbsp;<b><?=$row['steps']?></b></div>
+                    <div class="row"><?=$row['posted']?><span class="grow">&nbsp;</span><b><?=$row['steps']?></b></div>
               <?php  }  ?>
-              <p>Totalt antal steg: <b><?=$totSteps?></b></p>
+              <p class="row sumrow"><span>Totalt antal steg:</span> <span class="grow">&nbsp;</span><b><?=$totSteps?></b></p>
+              <h6>Ditt lag</h6>
+                <h2><?=$db->getTeamName($team)?></h2>
+              
               <?php 
-                $sql="SELECT * FROM tblteam WHERE teamid=$team";
+                $sql="SELECT *, SUM(steps) AS totsteps FROM tblsteps WHERE team=$team";
                 $res=$db->runQuery($sql);
                 $t=$res->fetch_assoc();
-                $teamname=$t['teamname'];
-                $totsteps=0;
                 $sql="SELECT * FROM tbluser WHERE team=$team";
                 $res=$db->runQuery($sql);
                 $members=$res->num_rows;
@@ -83,12 +76,10 @@
                 $result=$db->runQuery($sql);
                 while ($row=$result->fetch_assoc()){ ?>
                     <div class="row">
-                        <b><?=$row['name']?></b>&nbsp;&nbsp;<?=getUserSteps(intval($row['userid']))?>
+                        <b><?=$row['name']?></b>&nbsp;&nbsp;<span class="grow">&nbsp;</span><?=getUserSteps(intval($row['userid']))?>
                     </div>
-              <?php  }
-              ?>
-              <h2><?=$teamname?></h2>
-              <p>Totalt antal steg:&nbsp;<?=$totsteps?></p>
+              <?php  }  ?>
+              <p class="row sumrow"><span>Totalt antal steg i laget:&nbsp;</span><span class="grow">&nbsp;</span><b><?=$t['totsteps']?></b></p>
         </section>
         <?php }; ?>
         </div>

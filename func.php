@@ -2,6 +2,100 @@
 session_start();
 $db=new Database("mockelngymnasie");
 
+// function randomTeamNames($numTeams) {
+
+//     $buzzwords = array("Mästarmindarna","Innovationsgänget","Framtidsfabriken","Tekniktriben","Kreativa Kraftverket","Äventyrsalliansen","Drömläget","Hjärnstormarna","Revolutionära Rävarna","Smartglidarna","Future Fusion","Framtidsfantomerna","Magimakarna","Strategiska Stjärnorna","Ändringsagenterna","Innovativ passus","SmartSquad","Digitala Diamanter","Tänktanken","Skaparstormen","Möjligheternas Mästare","Visionära Vindarna","Kreativitetskraften","Innovationssamurajerna","Rationell Reform","Äventyrsälgarna","Kreativa Katalysatorn","Future Fighters","Analog Pedagog","GeniusGänget","Formativa Kaptenerna","Skaparstjärnorna","Kognitiv Tornado","Drömmarnas Drakar","Äventyrliga Änglarna","Innovationsvågen");
+//     $teamName = array();
+
+//     // Slumpa och skapa unika lagnamn
+//     for ($i = count($teamName); $i < $numTeams; $i++) {
+//         $randomWord = $buzzwords[array_rand($buzzwords)];
+//         $potTeamName = $randomWord;
+
+//         // Kontrollera om lagnamnet redan finns
+//         while (in_array($potTeamName, $teamName)) {
+//             $randomWord = $buzzwords[array_rand($buzzwords)];
+//             $potTeamName = $randomWord;
+//         }
+
+//         $teamName[] = $potTeamName;
+//     }
+
+//     return $teamName;
+// }
+
+
+function assignTeamNumbers(&$users, $numTeams, $offsetOfTeamnumber) {
+    // Calculate the minimum number of users per team
+    $minUsersPerTeam = ceil(count($users) / (2 * $numTeams));
+    $d = new Database("mockelngymnasie");
+
+    // Initialize an array to store assigned team numbers
+    $teamNumbers = array_fill($offsetOfTeamnumber, $numTeams, 0);
+
+    // Shuffle the array of users
+    shuffle($users);
+
+    // Loop through each user and assign a team number
+    foreach ($users as &$user) {
+        // Find the team with the minimum count and assign it to the user
+        $teamNumber = array_search(min($teamNumbers), $teamNumbers);
+        $teamNumbers[$teamNumber]++;
+
+        // Update the user's team number in the database
+        $sql = "UPDATE tbluser SET team = $teamNumber WHERE userid = $user";
+        $d->runQuery($sql);
+    }
+
+    // Break the reference with the last element to avoid unexpected behavior elsewhere
+    unset($user);
+}
+
+
+// Function to get an available team number
+function getAvailableTeam($teamNumbers, $numTeams, $minUsersPerTeam) {
+    // Iterate through team numbers and return the first team that hasn't reached the minimum
+    for ($i = 1; $i <= $numTeams; $i++) {
+        if (!isset($teamNumbers[$i]) || $teamNumbers[$i] < $minUsersPerTeam) {
+            return $i;
+        }
+    }
+
+    // If all teams have reached the minimum, return the team with the fewest users
+    $minTeam = array_search(min($teamNumbers), $teamNumbers);
+    return $minTeam;
+}
+
+
+//$numTeams = 3; // Set the desired number of teams
+
+// Assign team numbers to users
+//assignTeamNumbers($users, $numTeams);
+
+
+
+
+function randomTeamNames($numTeams) {
+    $buzzwords = ["Mästarmindarna", "Innovationsgänget", "Framtidsfabriken", "Tekniktriben", "Kreativa Kraftverket", "Äventyrsalliansen", "Drömläget", "Hjärnstormarna", "Revolutionära Rävarna", "Smartglidarna", "Future Fusion", "Framtidsfantomerna", "Magimakarna", "Strategiska Stjärnorna", "Ändringsagenterna", "Innovativ passus", "SmartSquad", "Digitala Diamanter", "Tänktanken", "Skaparstormen", "Möjligheternas Mästare", "Visionära Vindarna", "Kreativitetskraften", "Innovationssamurajerna", "Rationell Reform", "Äventyrsälgarna", "Kreativa Katalysatorn", "Future Fighters", "Analog Pedagog", "GeniusGänget", "Formativa Kaptenerna", "Skaparstjärnorna", "Kognitiv Tornado", "Drömmarnas Drakar", "Äventyrliga Änglarna", "Innovationsvågen"];
+    $teamNames =array(); 
+    if(!($numTeams>count($buzzwords))){
+        shuffle($buzzwords); // Slumpa buzzwords för att få en slumpmässig ordning
+
+        // Om antalet lag är större än antalet unika buzzwords, använd endast unika buzzwords för att undvika upprepningar
+        $numUniqueTeams = min($numTeams, count($buzzwords));
+        $uniqueTeamNames = array_slice($buzzwords, 0, $numUniqueTeams);
+        $teamNames=$uniqueTeamNames;
+    }else{
+        $teamNames =array(); 
+        for ($i = 1; $i <= $numTeams; $i++) {
+            $teamNames[] = "Lag " . $i;
+        }
+    }
+    // Om det finns fler lag än unika buzzwords, upprepa unika buzzwords för att fylla upp laglistan
+    
+    return $teamNames;
+}
+
 
 function dateDiff($startDate, $endDate){
     // Konvertera datumsträngarna till timestamps
@@ -240,6 +334,76 @@ class Database extends Crypt
      */
     public function close(){
         return $this->mysqli->close();
+    }
+
+    public function updateCompTotSteps(){
+        $sql="SELECT * FROM tblsteps";
+        $res=$this->mysqli->query($sql);
+        while ($row=$res->fetch_assoc()){
+            $comp=intval($row['comp']);
+            $sql="SELECT * FROM tblsteps WHERE comp=$comp";
+            $tstep=0;
+            $result=$this->mysqli->query($sql);
+            while($r=$result->fetch_assoc()){
+                $tstep+=intval($r['steps']);
+            }
+            $sql="UPDATE tblcomp SET totsteps=$tstep WHERE compid=$comp";
+            $this->mysqli->query($sql);
+
+        }
+    }
+
+    public function getTeamName($teamid){
+        $id=intval($teamid);
+        $sql="SELECT * FROM tblteam WHERE teamid=$id";
+        if($row = $this->mysqli->query($sql)->fetch_assoc()){
+            return $row['teamname'];
+        }else{
+            return "Hittade inte lagnamnet";
+        };
+        
+    }
+    public function getCompName($compid){
+        $id=intval($compid);
+        $sql="SELECT * FROM tblcomp WHERE compid=$id";
+        $row = $this->mysqli->query($sql)->fetch_assoc();
+        return $row['compname'];
+    }
+    public function getUserName($userid){
+        $id=intval($userid);
+        $sql="SELECT * FROM tbluser WHERE userid=$id";
+        $row = $this->mysqli->query($sql)->fetch_assoc();
+        return $row['username'];
+    }
+    public function getName($userid){
+        $id=intval($userid);
+        $sql="SELECT * FROM tbluser WHERE userid=$id";
+        $row = $this->mysqli->query($sql)->fetch_assoc();
+        return $row['name'];
+    }
+
+    public function getTotStepsForComp($compid){
+        $id=intval($compid);
+        $sql="SELECT * FROM tblcomp WHERE compid=$id";
+        $r=$this->mysqli->query($sql)->fetch_assoc();
+        return intval($r['totsteps']);
+    }
+    public function getTotStepsForUser($userid){
+        $id=intval($userid);
+        $sql="SELECT SUM(steps) AS totsteps FROM tblsteps WHERE user=$id";
+        $r=$this->mysqli->query($sql)->fetch_assoc();
+        return intval($r['totsteps']);
+    }
+
+    public function getUserIdArray($compid){
+        $id=intval($compid);
+        $sql="SELECT user FROM tblsteps WHERE compid = $id";
+        $res=$this->mysqli->query($sql);
+        $idArray=array();
+        while($row=$res->fetch_assoc()){
+            $idArray[]=intval($row['user']);
+        }
+        return $idArray;
     }
 
 }
