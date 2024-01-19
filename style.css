@@ -227,6 +227,8 @@ body{ /* detta är vanlig 'body reset' */
   border-radius: .5rem;
   background: var(--formbuttoncolor);
   color:var(--background);
+  font:bold 1.2rem system-ui;
+  margin-left: auto;
 }
 section a{
   text-decoration: none;

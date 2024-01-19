@@ -405,6 +405,22 @@ class Database extends Crypt
         }
         return $idArray;
     }
+    public function ifTeamExists($team) {
+        $tid=intval($team);
+        $sql="SELECT * FROM tblteam WHERE teamid = $tid";
+        $numTeams=$this->runQuery($sql)->num_rows;
+        return $numTeams;
+
+    }
+    /**
+     * function to clean all teams from steps that no longer exists
+     * ...so if deleting a team, steps regisrtred for user will remain but the team it was registred will be removed
+     *
+     * @return void
+     */
+    public function cleanSteps(){
+        
+    }
 
 }
 

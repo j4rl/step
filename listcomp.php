@@ -12,7 +12,7 @@
 ?>
 
         <div class="main">
-            <div class="container"><h1>Tävlingar<?php if(isLevel(100)){ ?>&nbsp;&nbsp;<a href="addcomp.php"><i class="fi fi-rr-add"></i></a><?php } ?></h1></div>
+            <div class="container"><h1>Tävlingar<?php if(isLevel(100)){ ?>&nbsp;&nbsp;<a href="addcomp.php"><i class="fi fi-rr-add" title="Lägg till tävling"></i></a><?php } ?></h1></div>
             <?php while($row=$result->fetch_assoc()){ ?>
                     <div class="row">
                         <div class="usr_row">

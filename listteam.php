@@ -13,7 +13,7 @@
 ?>
 
         <div class="main">
-            <div class="container"><h1>Lag<?php if(isLevel(100)){ ?>&nbsp;&nbsp;<a href="addteam.php"><i class="fi fi-rr-add"></i></a><?php } ?></h1></div>
+            <div class="container"><h1>Lag<?php if(isLevel(100)){ ?>&nbsp;&nbsp;<a href="addteam.php"><i class="fi fi-rr-add" title="Lägg till ett eget lag"></i></a>&nbsp;&nbsp;<a href="pickusers.php"><i class="fi fi-rr-dice-six" title="Välj användare och slumpa lag"></i></a><?php } ?></h1></div>
             <?php while($row=$r->fetch_assoc()){ ?>
                     <div class="row">
                         <div class="usr_row">

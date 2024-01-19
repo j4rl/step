@@ -55,11 +55,11 @@ header("Location: adm_dash.php");
             <h4>Användare</h4>
         <?php
             // Exekvera en SQL-fråga för att hämta alla användare
-            $result = $db->runQuery("SELECT userid, username FROM tbluser");
+            $result = $db->runQuery("SELECT userid, name FROM tbluser");
 
             // Visa checkbox för varje användare
             while ($row = mysqli_fetch_assoc($result)) { ?>
-                <div><input type="checkbox" name="selected_users[]" value="<?=$row['userid']?>">&nbsp;&nbsp;<b><?=$row['username']?></b></div> 
+                <div><input type="checkbox" name="selected_users[]" value="<?=$row['userid']?>">&nbsp;&nbsp;<b><?=$row['name']?></b></div> 
          <?php   }    ?>
         </div>
         <input type="submit" name="btn" value="Välj användare">
