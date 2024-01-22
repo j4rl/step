@@ -20,12 +20,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nytt lag</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<?php require_once("_head.php") ?>
 <body>
     <?php     if(isLevel(10)){ 
                 $sql="SELECT userid, name FROM tbluser ORDER BY name DESC";
@@ -46,6 +41,7 @@
         <div id="teamleaderStatus"></div>
     <input type="submit" name="btn" id="btn" value="Registrera">
     </form>   <?php } ?>
+    <?php require_once("_footer.php") ?>
     <script>
         $(document).ready(function() {
             $('#teamleader').on('select', function() {

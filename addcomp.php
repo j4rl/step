@@ -13,11 +13,7 @@
 
 ?>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add user</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<?php require_once("_head.php") ?>
 <body>
 
 <div class="main">
@@ -32,6 +28,6 @@
         <input type="submit" value="Skicka" name="btn">
     </form>
 </div>
-
+<?php require_once("_footer.php") ?>
 </body>
 </html>

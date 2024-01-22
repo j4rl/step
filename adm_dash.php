@@ -2,19 +2,10 @@
 <?php if(!isLevel(100)) header("Location: index.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js"></script>
-</head>
+<?php require_once("_head.php") ?>
 <body>
 <header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Admin</header>
-    <nav>
-        <a href="index.php">Tillbaka</a>
-        <a href="adm_dash.php">Admin&nbsp;hem</a>
-    </nav>
+<?php require_once("_adm-menu.php") ?>
     <main>
         <div class="row">
         <section class="adm_users">
@@ -45,6 +36,6 @@
         </div>
 
     </main>
-    <footer class="cen">&copy;j4rl</footer>    
+    <?php require_once("_footer.php") ?>
 </body>
 </html>

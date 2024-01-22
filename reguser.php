@@ -42,6 +42,7 @@
         <input type="submit" value="Lägg till användare" name="btn" id="btn">
     </form>
 </div>
+<?php require_once("_footer.php") ?>
 <script>
         $(document).ready(function() {
             $('#usr').on('input', function() {

@@ -7,23 +7,10 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-	<script src="app.js"></script>
-</head>
+<?php require_once("_head.php") ?>
 <body>
     <header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Stegtävling</header>
-    <nav>
-        <div class="menu">
-        <a href="index.php">Hem</a>     
-            <?php if(isLevel(100)){ ?><a href="adm_dash.php">Admin</a><?php }; ?>
-            <?php if(!isLoggedIn()){ ?><a href="reguser.php">Registrera&nbsp;användare</a><?php }; ?>
-        </div>
-		<div class="loginout"><?php if(isLoggedIn()){ ?><a href="logout.php">Logga&nbsp;ut</a><?php }else{ ?><a href="login.php">Logga&nbsp;in</a><?php }; ?></div>
-    </nav>
+<?php require_once("_menu.php") ?>
     <main>
         <div class="row">
         <section>
@@ -88,7 +75,7 @@
         <?php } }; ?>
         </div>
     </main>
-    <footer class="cen">&copy;j4rl</footer>
+    
     
 </body>
 </html>

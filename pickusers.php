@@ -38,12 +38,7 @@ header("Location: adm_dash.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Välj användare</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<?php require_once("_head.php") ?>
 <body>
    
 
@@ -64,5 +59,6 @@ header("Location: adm_dash.php");
         </div>
         <input type="submit" name="btn" value="Välj användare">
     </form>
+    <?php require_once("_footer.php") ?>
 </body>
 </html>

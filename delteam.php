@@ -5,7 +5,6 @@
     $id=intval($_GET["del"]);
     $sql="DELETE FROM tblteam WHERE teamid=$id";
     $result=$db->runQuery($sql);
-    
+    if($db->cleanSteps()){};
     header("Location: adm_dash.php");
-
 ?>

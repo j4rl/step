@@ -419,7 +419,13 @@ class Database extends Crypt
      * @return void
      */
     public function cleanSteps(){
-        
+        //Get all records from tblsteps and crosscheck with all records of tblteam and replace team in tblssteps with null if there isn't a teamid that corresponds
+        $sql="UPDATE tblsteps SET team = 0 WHERE team NOT IN (SELECT teamid FROM tblteam)";
+        if($res=$this->runQuery($sql)){
+            return true;
+        }else{
+            return false;
+        };
     }
 
 }

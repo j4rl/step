@@ -1,0 +1,1 @@
+<footer class="cen">&copy;j4rl</footer>
