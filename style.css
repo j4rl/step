@@ -49,6 +49,8 @@ font-family: 'Ruda', sans-serif;
     --outline:1px dotted red;
     box-sizing: border-box;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    min-width:0;
+    min-height: 0;
 }
 body{ /* detta är vanlig 'body reset' */
     display:flex;
