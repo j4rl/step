@@ -22,11 +22,13 @@
 <html lang="en">
 <?php require_once("_head.php") ?>
 <body>
+<header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Nytt lag</header><main>
     <?php     if(isLevel(10)){ 
                 $sql="SELECT userid, name FROM tbluser ORDER BY name DESC";
                 $result=$db->runQuery($sql);
                 
         ?>
+        
     <form action="newteam.php" method="post">
         <h1>Skapa nytt lag</h1>
         <label for="team">Lagnamn (Ehrrm, håll god ton...)</label>
@@ -40,7 +42,7 @@
         </select>
         <div id="teamleaderStatus"></div>
     <input type="submit" name="btn" id="btn" value="Registrera">
-    </form>   <?php } ?>
+    </form>   <?php } ?></main>
     <?php require_once("_footer.php") ?>
     <script>
         $(document).ready(function() {

@@ -18,8 +18,8 @@
 <html lang="en">
 <?php require_once("_head.php") ?>
 <body>
-
-<div class="main">
+<header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Lägg till lag</header>
+<main>
     <form autocomplete="false" method="post" action="addteam.php">
         <label for="usr">Lagnamn</label>
         <input type="text" name="team" placeholder="Lagnamn" required>
@@ -32,7 +32,7 @@
                 </select>
         <input type="submit" value="Lägg till lag" name="btn">
     </form>
-</div>
+                </main>
 <?php require_once("_footer.php") ?>
 </body>
 </html>

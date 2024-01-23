@@ -21,6 +21,8 @@
 <html lang="en">
 <?php require_once("_head.php") ?>
 <body>
+<header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Registrera steg</header>
+    <main>
 <?php if(isLoggedIn()){ ?>
     <form action="regsteps.php" method="POST">
         <h1>Fyll i steg</h1>
@@ -29,7 +31,7 @@
         <input type="hidden" name="comp" value="<?=$comp?>">
         <input type="submit" value="Registrera steg" name="btn" id="btn">
     </form>
-    <?php }; ?>
+    <?php }; ?></main>
     <?php require_once("_footer.php") ?>
 </body>
 </html>

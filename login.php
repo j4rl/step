@@ -8,13 +8,14 @@
 <html lang="en">
 <?php require_once("_head.php") ?>
 <body class="cen">
-    <div class="main">
-        <form action="login.php" method="POST">
-            <input type="text" name="username" placeholder="Användarnamn" required>
-            <input type="password" name="password" required>
+<header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Logga in</header>
+    <main>
+        <form action="login.php" autocomplete="off" method="POST">
+            <input type="text" name="username" placeholder="Användarnamn" autocomplete="off" required>
+            <input type="password" name="password" autocomplete="new-password" required>
             <input type="submit" name="btnLogin" value="Logga in">
         </form>
-    </div>
+</main>
         <?php require_once("_footer.php") ?>
 </body>
 </html>

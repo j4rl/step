@@ -15,8 +15,8 @@
 <html lang="en">
 <?php require_once("_head.php") ?>
 <body>
-
-<div class="main">
+<header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Lägg till tävling</header>
+<main>
 <form method="post" action="addcomp.php"><h1>Ny tävling</h1>
     <label for="comp">Namn på tävlingen</label>
         <input type="text" name="comp">
@@ -27,7 +27,7 @@
         <input type="date" name="stop">
         <input type="submit" value="Skicka" name="btn">
     </form>
-</div>
+</main>
 <?php require_once("_footer.php") ?>
 </body>
 </html>

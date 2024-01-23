@@ -15,8 +15,8 @@
 <html lang="en">
 <?php require_once("_head.php") ?>
 <body>
-
-<div class="main">
+<header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Lägg till användare</header>
+<main>
     <form autocomplete="false" method="post" action="adduser.php">
         <label for="usr">Användarnamn</label>
         <input type="text" name="usr" placeholder="Användarnamn" required>
@@ -26,7 +26,7 @@
         <input autocomplete="new-password" type="password" name="pwd" required>
         <input type="submit" value="Lägg till användare" name="btn">
     </form>
-</div>
+</main>
 <?php require_once("_footer.php") ?>
 </body>
 </html>

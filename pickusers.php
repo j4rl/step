@@ -40,7 +40,8 @@ header("Location: adm_dash.php");
 <html lang="en">
 <?php require_once("_head.php") ?>
 <body>
-   
+<header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Slumpa lag</header>
+   <main>
 
     <form action="pickusers.php" method="post" name="pickusers">
         <h1>Välj användare</h1>
@@ -58,7 +59,7 @@ header("Location: adm_dash.php");
          <?php   }    ?>
         </div>
         <input type="submit" name="btn" value="Välj användare">
-    </form>
+    </form></main>
     <?php require_once("_footer.php") ?>
 </body>
 </html>

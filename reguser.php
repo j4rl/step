@@ -25,8 +25,8 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-
-<div class="main">
+<header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Registrera användare</header>
+<main>
     <form autocomplete="false" method="post" action="adduser.php">
         <h1>Registrera användare</h1>
         <label for="usr">Användarnamn</label>
@@ -41,7 +41,7 @@
         <div id="passwordMatchStatus" class="password-mismatch">Lösenorden matchar inte</div>
         <input type="submit" value="Lägg till användare" name="btn" id="btn">
     </form>
-</div>
+</main>
 <?php require_once("_footer.php") ?>
 <script>
         $(document).ready(function() {

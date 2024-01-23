@@ -16,9 +16,9 @@
 <html lang="en">
 <?php require_once("_head.php") ?>
 <body>
-
+<header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Ändra lag</header>
  
-<div class="main">
+<main>
     <?php
 //first time around, lets check if we got a redirection from listuser (is there a $_GET)?
     if(isset($_GET['edit'])){
@@ -46,7 +46,7 @@
     </form>
 <?php  } ?>
 
-</div>  
+                </main>  
 <?php require_once("_footer.php") ?>    
 </body>
 </html>

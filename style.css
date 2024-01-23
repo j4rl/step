@@ -116,6 +116,9 @@ body{ /* detta är vanlig 'body reset' */
     background: var(--formback);
     border-radius:.6rem;
     box-shadow: 10px 10px 10px rgb(0,0,0,0.3);
+    margin-inline: auto;
+    margin-top:auto;
+    margin-bottom: auto;
   }
   input, select, textarea{
     font:1.2rem system-ui;
