@@ -154,13 +154,27 @@ function getUserSteps($uid){
     }
     return $totsteps;
 }
-function getTeamSteps($teamid){
+function getUserStepsTeam($uid, $teamid){
+    $uid=intval($uid);
+    $teamid=intval($teamid);
     $totsteps=0;
     $d=new Database("mockelngymnasie");
-    $sql="SELECT * FROM tblsteps JOIN WHERE team = $teamid";
+    $sql="SELECT * FROM tblsteps WHERE user = $uid AND team=$teamid";
     $res=$d->runQuery($sql);
     while($row=$res->fetch_assoc()){
         $totsteps+=$row['steps'];
+    }
+    return $totsteps;
+}
+
+function getTeamSteps($teamid){
+    $teamid=intval($teamid);
+    $totsteps=0;
+    $d=new Database("mockelngymnasie");
+    $sql="SELECT * FROM tblsteps WHERE team = $teamid";
+    $res=$d->runQuery($sql);
+    while($row=$res->fetch_assoc()){
+        $totsteps=$totsteps+intval($row['steps']);
     }
     return $totsteps;
 }
@@ -337,18 +351,18 @@ class Database extends Crypt
     }
 
     public function updateCompTotSteps(){
-        $sql="SELECT * FROM tblsteps";
+        $sql="SELECT * FROM tblsteps WHERE NOT team=0";
         $res=$this->mysqli->query($sql);
         while ($row=$res->fetch_assoc()){
             $comp=intval($row['comp']);
-            $sql="SELECT * FROM tblsteps WHERE comp=$comp";
+            $sql="SELECT * FROM tblsteps WHERE comp=$comp AND NOT team=0";
             $tstep=0;
             $result=$this->mysqli->query($sql);
             while($r=$result->fetch_assoc()){
                 $tstep+=intval($r['steps']);
             }
             $sql="UPDATE tblcomp SET totsteps=$tstep WHERE compid=$comp";
-            $this->mysqli->query($sql);
+            if($this->mysqli->query($sql)){};
 
         }
     }
@@ -363,6 +377,19 @@ class Database extends Crypt
         };
         
     }
+
+    public function isTeamMember($uid,$teamid){
+        $uid=intval($uid);
+        $teamid=intval($teamid);
+        $sql="SELECT * FROM tbluser WHERE userid=$uid AND team=$teamid";
+        if($row = $this->runQuery($sql)->fetch_assoc()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
     public function getCompName($compid){
         $id=intval($compid);
         $sql="SELECT * FROM tblcomp WHERE compid=$id";
@@ -386,6 +413,19 @@ class Database extends Crypt
         $id=intval($compid);
         $sql="SELECT * FROM tblcomp WHERE compid=$id";
         $r=$this->mysqli->query($sql)->fetch_assoc();
+        return intval($r['totsteps']);
+    }
+    public function getTotStepsForTeam($teamid){
+        $teamid=intval($teamid);
+        $sql="SELECT SUM(steps) AS totsteps FROM tblsteps WHERE team=$teamid";
+        $r=$this->runQuery($sql)->fetch_assoc();
+        return intval($r['totsteps']);
+    }
+    public function getTotStepsForTeamComp($teamid, $compid){
+        $teamid=intval($teamid);
+        $compid=intval($compid);
+        $sql="SELECT SUM(steps) AS totsteps FROM tblsteps WHERE team=$teamid AND comp=$compid";
+        $r=$this->runQuery($sql)->fetch_assoc();
         return intval($r['totsteps']);
     }
     public function getTotStepsForUser($userid){
@@ -426,6 +466,26 @@ class Database extends Crypt
         }else{
             return false;
         };
+    }
+    public function cleanTeamleader($uid,$team){
+        $uid=intval($uid);
+        $team=intval($team);
+        if(!$this->ifTeamExists($team)){
+            $sql="UPDATE tbluser SET team=0 WHERE userid=$uid";
+            $r=$this->runQuery($sql);
+        }
+    }
+
+    public function getUserStepsTeam($uid, $teamid){
+        $uid=intval($uid);
+        $teamid=intval($teamid);
+        $totsteps=0;
+        $sql="SELECT * FROM tblsteps WHERE user = $uid AND team=$teamid";
+        $res=$this->runQuery($sql);
+        while($row=$res->fetch_assoc()){
+            $totsteps+=$row['steps'];
+        }
+        return $totsteps;
     }
 
 }

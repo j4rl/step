@@ -47,8 +47,9 @@ header("Location: adm_dash.php");
         <h1>Välj användare</h1>
         <label for="numteams">Ange antal lag</label>
         <input type="number" name="numteams">
-        <div class="colform">
-            <h4>Användare</h4>
+       <h4>Användare</h4> 
+       <div class="colform">
+            
         <?php
             // Exekvera en SQL-fråga för att hämta alla användare
             $result = $db->runQuery("SELECT userid, name FROM tbluser");
