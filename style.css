@@ -46,9 +46,10 @@ font-family: 'Ruda', sans-serif;
 *{
     margin: 0;
     padding: 0;
-    --outline:1px dotted red;
+    --outline:1px dotted red; /* För debugging... (se längre ned) */
     box-sizing: border-box;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* Dessa två tar bort weirdness såsom casual overflow trots att man använder flex-shrink, vet inte varför dock... */
     min-width:0;
     min-height: 0;
 }
