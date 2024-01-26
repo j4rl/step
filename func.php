@@ -487,6 +487,13 @@ class Database extends Crypt
         }
         return $totsteps;
     }
+    public function getTeamRank($teamid){
+        $teamid=intval($teamid);
+        $sql="SELECT team, totsteps, RANK() OVER (ORDER BY totsteps DESC) AS team_rank FROM (SELECT team, SUM(steps) AS totsteps FROM tblsteps GROUP BY team) AS team_totals WHERE team=$teamid";
+        if($res=$this->runQuery($sql)->fetch_assoc()){
+            return $res['team_rank'];
+        };  
+    }
 
 }
 
