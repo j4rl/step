@@ -1,7 +1,8 @@
+
 <!DOCTYPE html>
 <?php
     require_once('func.php');
-    if(!isLevel(100)) header("Location: index.php");
+    //if(!isLevel(100)) header("Location: index.php");
     if(isset($_POST['btn'])){
         $user=$_POST['usr'];
         $real=$_POST['real'];
@@ -16,6 +17,7 @@
 <?php require_once("_head.php") ?>
 <body>
 <header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Lägg till användare</header>
+<?php require_once("_menu.php"); ?>
 <main>
     <form autocomplete="false" method="post" action="adduser.php">
         <label for="usr">Användarnamn</label>
