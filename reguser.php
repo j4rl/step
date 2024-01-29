@@ -3,11 +3,6 @@
     require_once('func.php');
     
     if(isset($_POST['btn'])){
-
-
-
-
-
         $user=$_POST['usr'];
         $real=$_POST['real'];
         $pass=md5($_POST['pwd']);
@@ -27,7 +22,7 @@
 <body>
 <header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Registrera användare</header>
 <main>
-    <form autocomplete="false" method="post" action="adduser.php">
+    <form autocomplete="false" method="post" action="reguser.php">
         <h1>Registrera användare</h1>
         <label for="usr">Användarnamn</label>
         <input type="text" name="usr" id="usr" placeholder="Användarnamn" required>

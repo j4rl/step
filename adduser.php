@@ -19,7 +19,7 @@
 <header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Lägg till användare</header>
 <?php require_once("_menu.php"); ?>
 <main>
-    <form autocomplete="false" method="post" action="reguser.php">
+    <form autocomplete="false" method="post" action="adduser.php">
         <label for="usr">Användarnamn</label>
         <input type="text" name="usr" placeholder="Användarnamn" required>
         <label for="real">För och efternamn</label>
