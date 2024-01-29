@@ -2,27 +2,6 @@
 session_start();
 $db=new Database("mockelngymnasie");
 
-// function randomTeamNames($numTeams) {
-
-//     $buzzwords = array("Mästarmindarna","Innovationsgänget","Framtidsfabriken","Tekniktriben","Kreativa Kraftverket","Äventyrsalliansen","Drömläget","Hjärnstormarna","Revolutionära Rävarna","Smartglidarna","Future Fusion","Framtidsfantomerna","Magimakarna","Strategiska Stjärnorna","Ändringsagenterna","Innovativ passus","SmartSquad","Digitala Diamanter","Tänktanken","Skaparstormen","Möjligheternas Mästare","Visionära Vindarna","Kreativitetskraften","Innovationssamurajerna","Rationell Reform","Äventyrsälgarna","Kreativa Katalysatorn","Future Fighters","Analog Pedagog","GeniusGänget","Formativa Kaptenerna","Skaparstjärnorna","Kognitiv Tornado","Drömmarnas Drakar","Äventyrliga Änglarna","Innovationsvågen");
-//     $teamName = array();
-
-//     // Slumpa och skapa unika lagnamn
-//     for ($i = count($teamName); $i < $numTeams; $i++) {
-//         $randomWord = $buzzwords[array_rand($buzzwords)];
-//         $potTeamName = $randomWord;
-
-//         // Kontrollera om lagnamnet redan finns
-//         while (in_array($potTeamName, $teamName)) {
-//             $randomWord = $buzzwords[array_rand($buzzwords)];
-//             $potTeamName = $randomWord;
-//         }
-
-//         $teamName[] = $potTeamName;
-//     }
-
-//     return $teamName;
-// }
 
 
 function assignTeamNumbers(&$users, $numTeams, $offsetOfTeamnumber) {
