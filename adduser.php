@@ -1,3 +1,5 @@
+
+<!DOCTYPE html>
 <?php
     require_once('func.php');
     //if(!isLevel(100)) header("Location: index.php");
@@ -11,7 +13,6 @@
     }
 
 ?>
-<!DOCTYPE html>
 <html lang="en">
 <?php require_once("_head.php") ?>
 <body>
