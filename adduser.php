@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <?php
     require_once('func.php');
-    //if(!isLevel(100)) header("Location: index.php");
+    ob_start();
+    if(!isLevel(100)) header("Location: index.php");
     if(isset($_POST['btn'])){
         $user=$_POST['usr'];
         $real=$_POST['real'];

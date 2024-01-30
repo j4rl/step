@@ -1,6 +1,5 @@
 <?php 
     require_once('func.php');
-
     //if(isLoggedIn()) header("Location: index.php");
     if(isLevel(100)){
         $sql="SELECT * FROM tblcomp ORDER BY stopdate, startdate DESC";

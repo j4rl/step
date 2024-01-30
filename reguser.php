@@ -1,7 +1,6 @@
-<!DOCTYPE html>
 <?php
     require_once('func.php');
-    
+    ob_start();
     if(isset($_POST['btn'])){
         $user=$_POST['usr'];
         $real=$_POST['real'];
@@ -12,6 +11,8 @@
     }
 
 ?>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">

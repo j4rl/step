@@ -1,5 +1,6 @@
 <?php 
     require_once("func.php");
+    ob_start();
     if(!isset($_GET['comp'])){
         header("Location: index.php");
     }else{

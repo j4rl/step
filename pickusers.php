@@ -1,4 +1,5 @@
-<?php require_once("func.php"); ?>
+<?php require_once("func.php");
+ob_start(); ?>
 <?php
 if(isset($_POST['btn'])){
     $selectedUsers = $_POST['selected_users'] ?? [];

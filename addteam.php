@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
     require_once('func.php');
+    ob_start();
     if(!isLevel(100)) header("Location: index.php");
     if(isset($_POST['btn'])){
         $id=$_POST['id'];

@@ -1,4 +1,7 @@
-<?php require_once("func.php") ?>
+<?php 
+    require_once("func.php");
+    ob_start(); 
+?>
 <?php if(!isLevel(100)) header("Location: index.php"); ?>
 <!DOCTYPE html>
 <html lang="en">

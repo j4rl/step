@@ -1,4 +1,5 @@
-<?php require_once("func.php") ?>
+<?php require_once("func.php");
+ob_start(); ?>
 <?php 
         $today = date("Y-m-d");
         $sql="SELECT * FROM tblcomp WHERE startdate<'$today' AND stopdate>'$today'";

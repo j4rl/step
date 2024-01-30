@@ -1,6 +1,6 @@
 <?php 
     require_once('func.php');
-
+    
     //if(isLoggedIn()) header("Location: index.php");
     if(isLevel(100)){
         $sql="SELECT * FROM tblteam LEFT JOIN tbluser ON tblteam.teamleader=tbluser.userid ORDER BY tblteam.wins DESC";

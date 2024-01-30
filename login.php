@@ -1,5 +1,6 @@
 <?php
     require_once("func.php");
+    ob_start();
     if(isset($_POST['btnLogin'])){
         if($db->checkUser($_POST['username'], $_POST['password'])) header("Location: index.php");
     }
