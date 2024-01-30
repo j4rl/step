@@ -1,5 +1,7 @@
-<?php require_once("func.php");
-ob_start(); ?>
+<?php 
+require_once("func.php");
+ob_start();
+?>
 <?php 
 
     if(isset($_POST['btn'])){

@@ -1,4 +1,3 @@
-
 <?php
     require_once('func.php');
     ob_start();

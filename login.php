@@ -12,7 +12,10 @@
 <header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Logga in</header>
     <main>
         <form action="login.php" autocomplete="off" method="POST">
+            <h2>Logga in</h2>
+            <label for="username">Användarnamn</label>
             <input type="text" name="username" placeholder="Användarnamn" autocomplete="off" required>
+            <label for="password">Lösenord</label>
             <input type="password" name="password" autocomplete="new-password" required>
             <input type="submit" name="btnLogin" value="Logga in">
         </form>

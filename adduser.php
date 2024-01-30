@@ -1,5 +1,3 @@
-
-
 <?php
     require_once('func.php');
     ob_start();
@@ -11,9 +9,7 @@
         $sql="INSERT INTO tbluser (username, password, name) VALUES ('$user', '$pass', '$real')";
         $result=$db->runQuery($sql);
         header("Location: adm_dash.php");
-    }
-
-?>
+    } ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php require_once("_head.php") ?>
