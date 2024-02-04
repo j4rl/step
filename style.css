@@ -18,7 +18,7 @@ font-family: 'Ruda', sans-serif;
     --hero_color:#616161;
     --header_back:#fff;
     --header_color:#000;
-    --rubrik:800 4rem "Roboto Slab", serif;
+    --rubrik:800 3rem "Roboto Slab", serif;
     --text: #06130d;
     --wayback:linear-gradient(180deg, #5c8757 0%, 64%, #005481 100%);
     --background: #f8fdfb;
@@ -114,7 +114,7 @@ body{ /* detta är vanlig 'body reset' */
     position:relative;
     display:flex;
     flex-direction:column;
-    width:40rem;
+    width:clamp(20rem, 80%, 40rem);
     padding:.5rem;
     background: var(--formback);
     border-radius:.6rem;
@@ -291,4 +291,28 @@ form[name="pickusers"]{
 }
 .main{
   overflow-y: auto;
+}
+
+@media screen and (max-width: 850px) { 
+  header, main, footer {
+    width:100%;
+  }
+  h1{
+    font-size:50%;
+  }
+  header img{
+    display:none;
+  }
+  header{
+    font-size:2rem;
+  }
+  nav{
+    position:absolute;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    font-size: 60%;
+    right:0px;
+    top:0px;
+    width:fit-content;
+  }
 }
