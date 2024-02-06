@@ -292,6 +292,20 @@ form[name="pickusers"]{
 .main{
   overflow-y: auto;
 }
+#borg{
+  display:none;
+  position:fixed;
+  top:0px;
+  right:0px;
+  z-index:1000;
+  font-size: 2rem;
+  width:fit-content;
+  height:fit-content;
+  background: #00000005;
+  padding: 3px 10px;
+  color:var(--header_color);
+  cursor:pointer;
+}
 
 @media screen and (max-width: 850px) { 
   header, main, footer {
@@ -307,6 +321,7 @@ form[name="pickusers"]{
     font-size:2rem;
   }
   nav{
+    opacity:0;
     position:absolute;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -314,5 +329,8 @@ form[name="pickusers"]{
     right:0px;
     top:0px;
     width:fit-content;
+  }
+  #borg{
+    display: inline-block;
   }
 }

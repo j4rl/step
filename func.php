@@ -266,11 +266,11 @@ class Database extends Crypt
 
     public function checkUser($username,$password){
         $pass=md5($password);
-        $user=$this->fix($username);
+        $user=htmlentities($this->fix($username), ENT_QUOTES);
 
         $query="SELECT * FROM tbluser WHERE username='$username' AND password='$pass'";
-        $result=$this->mysqli->query($query);
-        if($row=$result->fetch_assoc()){
+        if($result=$this->mysqli->query($query)){
+                    if($row=$result->fetch_assoc()){
             if($result->num_rows==1){
                 $_SESSION["uid"]=$row["userid"];
                 $_SESSION["name"]=$row["name"];
@@ -284,6 +284,12 @@ class Database extends Crypt
                 return false;
             }
         }
+        }else{
+            session_destroy();
+            //$this->$loggedIn=false;
+            return false;
+        };
+
 
     }
     /**
@@ -400,6 +406,13 @@ class Database extends Crypt
         $r=$this->runQuery($sql)->fetch_assoc();
         return intval($r['totsteps']);
     }
+    public function getStepfactorForTeamComp($team, $comp){
+        $team=intval($team);
+        $comp=intval($comp);
+        $totStepsTemComp=$this->getTotStepsForTeamComp($team, $comp); 
+        $numTeamMembers=$this->getNumTeamMembers($team);
+        return intval($totStepsTemComp/$numTeamMembers);
+    }
     public function getTotStepsForTeamComp($teamid, $compid){
         $teamid=intval($teamid);
         $compid=intval($compid);
@@ -430,6 +443,12 @@ class Database extends Crypt
         $numTeams=$this->runQuery($sql)->num_rows;
         return $numTeams;
 
+    }
+    public function getNumTeamMembers($team) {
+        $tid=intval($team);
+        $sql="SELECT * FROM tbluser WHERE team = $tid";
+        $numMembers=$this->runQuery($sql)->num_rows;
+        return $numMembers;
     }
     /**
      * function to clean all teams from steps that no longer exists
