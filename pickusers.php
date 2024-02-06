@@ -1,5 +1,5 @@
 <?php require_once("func.php");
-ob_start(); ?>
+ob_start(); ?><?php if(!isLevel(100)) header("Location: index.php"); ?>
 <?php
 if(isset($_POST['btn'])){
     $selectedUsers = $_POST['selected_users'] ?? [];

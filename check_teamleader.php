@@ -1,3 +1,4 @@
+<?php if(!isLevel(100)) header("Location: index.php"); ?>
 <?php
 // Connect to the database (replace these with your database credentials)
 $servername = "localhost";

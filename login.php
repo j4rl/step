@@ -13,9 +13,9 @@
     <main>
         <form action="login.php" autocomplete="off" method="POST">
             <h2>Logga in</h2>
-            <label for="username">Användarnamn (Det du kommer att logga in med)</label>
+            <label for="username">Användarnamn</label>
             <input type="text" name="username" placeholder="Användarnamn" autocomplete="off" required>
-            <label for="password">Lösenord (Minst 8 tecken)</label>
+            <label for="password">Lösenord</label>
             <input type="password" name="password" autocomplete="new-password" required>
             <input type="submit" name="btnLogin" value="Logga in">
         </form>

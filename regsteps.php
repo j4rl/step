@@ -28,7 +28,7 @@ ob_start(); ?>
     <form action="regsteps.php" method="POST">
         <h1>Fyll i steg</h1>
         <label for="steps"><?=$_SESSION['name']?> har gått</label>
-        <input type="number" name="steps" id="steps" required placeholder="Ange antal steg">
+        <input type="number" name="steps" id="steps" required placeholder="Ange antal steg (max 30000)" max="30000">
         <input type="hidden" name="comp" value="<?=$comp?>">
         <input type="submit" value="Registrera steg" name="btn" id="btn">
     </form>

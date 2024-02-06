@@ -245,7 +245,7 @@ section a:hover{
   color: var(--accent);
 }
 
-.row{
+.row, summary{
   display:flex;
   flex-direction: row;
   flex-wrap: nowrap;

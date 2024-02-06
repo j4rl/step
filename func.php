@@ -245,7 +245,11 @@ class Database extends Crypt
     public function runQuery($strQuery){
         //$strSQL=$this->fix($strQuery);
         $strSQL=$strQuery;
-        return $this->mysqli->query($strSQL);
+        if($res=$this->mysqli->query($strSQL)){
+            return $res;
+        }else{
+            return false;
+        };
     }
     /**
      * delRow
@@ -269,8 +273,8 @@ class Database extends Crypt
         $user=htmlentities($this->fix($username), ENT_QUOTES);
 
         $query="SELECT * FROM tbluser WHERE username='$username' AND password='$pass'";
-        if($result=$this->mysqli->query($query)){
-                    if($row=$result->fetch_assoc()){
+        $result=$this->mysqli->query($query);
+        if($row=$result->fetch_assoc()){
             if($result->num_rows==1){
                 $_SESSION["uid"]=$row["userid"];
                 $_SESSION["name"]=$row["name"];
@@ -283,11 +287,6 @@ class Database extends Crypt
                 //$this->$loggedIn=false;
                 return false;
             }
-        }
-        }else{
-            session_destroy();
-            //$this->$loggedIn=false;
-            return false;
         };
 
 
@@ -411,7 +410,11 @@ class Database extends Crypt
         $comp=intval($comp);
         $totStepsTemComp=$this->getTotStepsForTeamComp($team, $comp); 
         $numTeamMembers=$this->getNumTeamMembers($team);
+        if($numTeamMembers) {
         return intval($totStepsTemComp/$numTeamMembers);
+        } else {
+            return 0;
+        }
     }
     public function getTotStepsForTeamComp($teamid, $compid){
         $teamid=intval($teamid);

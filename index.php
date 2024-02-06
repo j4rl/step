@@ -31,7 +31,7 @@ ob_start(); ?>
                     $i++;
                     $barsize=100*(($db->getTotStepsForTeamComp($team['team'], $comp)) / $comptot); 
                     //$barsize=intval(100*(1));?>
-                    <div class="row"><b><?=$i?></b>&nbsp;&nbsp;<span class="team_name"><?=$db->getTeamName($team['team'])?></span><span class="grow">&nbsp;</span> <?=$team['totsteps']?> steg</div>
+                    <div class="row"><b><?=$i?></b>&nbsp;&nbsp;<span class="team_name"><?=$db->getTeamName($team['team'])?></span><span class="grow">&nbsp;</span> <?=$db->getStepfactorForTeamComp($team['team'],$comp)?> steg per person</div>
                     <p class="bar"><img src="bar.gif" width="<?=$barsize?>%"></p>
               <?php } } ?>
 

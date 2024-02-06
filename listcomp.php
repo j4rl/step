@@ -5,9 +5,6 @@
         $sql="SELECT * FROM tblcomp ORDER BY stopdate, startdate DESC";
         $result=$db->runQuery($sql);
     }
-    
-    
-
 ?>
 
         <div class="main">

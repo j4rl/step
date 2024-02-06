@@ -43,6 +43,7 @@
         <input type="hidden" name="pwd" value="<?=$user['password']?>">
         <label for="fakepwd">Lösenord</label>
         <input type="password" name="fakepwd" value="<?=$user['password']?>" disabled>
+        <label for="team"><?=$db->getTeamName($user['team'])?></label>
         <input type="text" name="team" id="team" value="<?=$user['team']?>">
         <div class="fullformdiv">
             <label for="lvl">Användarbehörighet (10-normal, 100-admin)</label>

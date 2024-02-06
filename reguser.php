@@ -21,18 +21,18 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-<header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Registrera användare</header>
+<header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Registrering</header>
 <main>
     <form autocomplete="false" method="post" action="reguser.php">
         <h1>Registrera användare</h1>
-        <label for="usr">Användarnamn</label>
+        <label for="usr">Användarnamn (Det du kommer att logga in med)</label>
         <input type="text" name="usr" id="usr" placeholder="Användarnamn" required>
         <div id="usernameStatus"></div>
         <label for="real">För och efternamn</label>
         <input type="text" name="real" placeholder="Ditt namn" required>
-        <label for="pwd">Lösenord</label>
+        <label for="pwd">Lösenord (Minst 8 tecken)</label>
         <input autocomplete="new-password" id="pwd" type="password" name="pwd" required pattern=".{8,}">
-        <label for="vpwd"></label>
+        <label for="vpwd">Verifiera lösenordet</label>
         <input autocomplete="new-password" id="vpwd" type="password" name="vpwd" required>
         <div id="passwordMatchStatus" class="password-mismatch">Lösenorden matchar inte</div>
         <input type="submit" value="Lägg till användare" name="btn" id="btn">
