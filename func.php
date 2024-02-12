@@ -496,6 +496,10 @@ class Database extends Crypt
         };  
     }
 
+    public function getTeamsByJSON($compid){
+        
+    }
+
 }
 
 ?>
