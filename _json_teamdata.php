@@ -28,13 +28,21 @@ GROUP BY
     t1.team,
     t1.user,
     t2.team_steps,
-    t2.user_count;
+    t2.user_count
+ORDER BY team_quota DESC;
 ";
     $res=$db->runQuery($sql);
+    $json='{ "data":{ "users": [ ';
+    
     while ($row=$res->fetch_assoc()) {
-
+        $json.='{ "team":"' . $db->getTeamName(intval($row['team'])).'",';
+        $json.=' "user":"' . $db->getName(intval($row['user'])).'",';
+        $json.=' "user_steps":' . $row['user_steps'].',';
+        $json.=' "team_steps":' . $row['team_steps'].',';
+        $json.=' "team_quota":' . intval($row['team_quota']).' },';  
     }
+    $json = substr($json, 0, -1);
+    $json.=' ] }}';
+    echo $json;
 }
-
-
 ?>
