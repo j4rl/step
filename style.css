@@ -249,6 +249,7 @@ section a:hover{
   display:flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  overflow-y: auto;
   justify-content: space-between;
 }
 .usr_row{

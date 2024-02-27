@@ -2,7 +2,7 @@
 ob_start(); ?>
 <?php 
         $today = date("Y-m-d");
-        $sql="SELECT * FROM tblcomp WHERE startdate<'$today' AND stopdate>'$today'";
+        $sql="SELECT * FROM tblcomp WHERE startdate=<'$today' AND stopdate>='$today'";
         $result=$db->runQuery($sql);
         $db->updateCompTotSteps();
 ?>
@@ -21,7 +21,7 @@ ob_start(); ?>
                 $comptot=$db->getTotStepsForComp($comp);?>
                 <h2><?=$row['compname']?></h2>
                 <h6><?php if(isLoggedIn()){ ?><a href="showallteams.php?comp=<?=$row['compid']?>" >Se&nbsp;alla&nbsp;lag...</a><?php }; ?></h6>
-                <p>Håller på från <?=$row['startdate']?> och slutar <?=$row['stopdate']?> det är <?=dateDiff($row['startdate'],$row['stopdate'])?> dagar kvar</p>
+                <p>Håller på från <?=$row['startdate']?> och slutar <?=$row['stopdate']?> det är <?=dateDiff($today, $row['stopdate'])?> dagar kvar</p>
                  <?php 
                 $query="SELECT team, SUM(steps) AS totsteps FROM tblsteps WHERE comp = $comp GROUP BY team ORDER BY totsteps DESC LIMIT 5";
                 $res=$db->runQuery($query);
