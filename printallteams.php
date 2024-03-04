@@ -29,10 +29,6 @@
 <body>
 <header><img src="Mockelngymnasiet-w400-svart-text-transparent.png" alt="Möckelngymnasiet">Stegtävling</header>
 
-    <section id="show">
-                <?php if(isLoggedIn()){ ?><a href="regsteps.php?comp=<?=$comp?>" class="blink">Registrera&nbsp;steg</a><?php }; ?>
-    </section>
-
 
 </body>
 </html>

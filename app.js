@@ -4,10 +4,10 @@ document.addEventListener("DOMContentLoaded",function(){
     borg.addEventListener("click",toggleMenu);
     function toggleMenu(){    
         menu=document.querySelector("nav");
-        if(menu.style.opacity=="1"){
-            menu.style.opacity="0";
+        if(menu.style.right=="0px"){
+            menu.style.right='-40ch';
         }else{
-            menu.style.opacity="1";
+            menu.style.right="0px";
         }
     }
 
