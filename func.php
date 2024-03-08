@@ -205,6 +205,29 @@ class Crypt{
         if (hash_hmac('sha256', $ciphertext, $key, true) !== $hash) return null;
         return openssl_decrypt($ciphertext, $method, $key, OPENSSL_RAW_DATA, $iv);
     }
+
+    function bruteForceMD5($targetHash, $charset, $maxLength) {
+        $charsetLength = strlen($charset);
+        $combinations = pow($charsetLength, $maxLength);
+    
+        for ($i = 0; $i < $combinations; $i++) {
+            $password = '';
+            $val = $i;
+    
+            for ($j = 0; $j < $maxLength; $j++) {
+                $password .= $charset[$val % $charsetLength];
+                $val = floor($val / $charsetLength);
+            }
+    
+            $hash = md5($password);
+    
+            if ($hash === $targetHash) {
+                return $password;
+            }
+        }
+    
+        return false;
+    }
 }
 
 /**
